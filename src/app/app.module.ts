@@ -20,9 +20,6 @@ import { FormsModule } from '@angular/forms';
 import { PostListComponent } from './posts/post-list/post-list.component';
 import { PostDetailsComponent } from './posts/post-details/post-details.component';
 import { DashBoardComponent } from './posts/dash-board/dash-board.component';
-import { FulldatePipe } from './pipe/fulldate.pipe';
-
-
 
 @NgModule({
   declarations: [
@@ -32,7 +29,6 @@ import { FulldatePipe } from './pipe/fulldate.pipe';
     PostListComponent,
     PostDetailsComponent,
     DashBoardComponent,
-    FulldatePipe
   ],
   imports: [
     BrowserModule,
