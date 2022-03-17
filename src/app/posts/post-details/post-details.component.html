@@ -1,4 +1,4 @@
 <div *ngIf="post">
-    <h3>{{ post.title }}</h3>
-    <p>post by {{ post.author }} &bull; {{ post.published }}</p>
+    <h3>{{ post!.title }}</h3>
+    <p>post by {{ post!.author }} &bull; {{ post!.published }}</p>
 </div>
