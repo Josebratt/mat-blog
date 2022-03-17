@@ -1,13 +1,17 @@
 <mat-toolbar>
     <mat-toolbar-row>
-        <span>Material Blog</span>
+        <span routerLink="/">Material Blog</span>
         <span class="spacer"></span>
-        <div>
-            <button mat-raised-button color="primary">Logout </button>
+        <div *ngIf="authService.user | async as user; else login">
+            <button routerLink="/dash-board"
+                     mat-stroked-button color="primary">New Post </button>
+            <button (click)="logout()"
+                    mat-raised-button color="primary"> Logout </button>
         </div>
-        <ng-template>
+        <ng-template #login>
             <div>
-                <button mat-raised-button color="primary">Login with</button>
+                <button (click)="onLogin()"
+                        mat-raised-button color="primary">Login with <i class="fab fa-google"></i></button>
             </div>
         </ng-template>
     </mat-toolbar-row>
