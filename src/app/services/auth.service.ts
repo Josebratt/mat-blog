@@ -12,10 +12,27 @@ export class AuthService {
 
   user: Observable<User | null>;
 
+  authState: any;
+
   constructor( private authService: AngularFireAuth) {
     this.user = this.authService.authState;
-   }
 
+    this.authService.authState.subscribe(
+      data => this.authState = data
+    )
+  }
+
+  // deternima si un usuario esta logueado
+  get authenticated(): boolean {
+    return this.authState !== null
+  }
+
+  // siesta logueado obtenemos el id del usuario.
+  get currentUserId(): string {
+    return this.authenticated ? this.authState.uid : null;
+  }
+
+  // iniciar sesion
   login(){
     try {
       this.authService.signInWithPopup(new firebase.auth.GoogleAuthProvider());
@@ -24,6 +41,7 @@ export class AuthService {
     }
   }
 
+  // cerrar sesion
   logout(){
     this.authService.signOut();
   }
