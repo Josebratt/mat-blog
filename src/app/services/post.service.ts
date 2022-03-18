@@ -30,7 +30,28 @@ export class PostService {
 
    // obtenemos el id del post y retornamos el valor
    getPostDetails(id: string){
-     this.postDoc = this.afs.doc<Post>(`posts/${id}`)
+     this.postDoc = this.afs.doc<Post>(`posts/${id}`);
      return this.postDoc.valueChanges();
    }
+
+   // guardamos la data creada
+   createPost(post: Post){
+     this.postCollection.add(post);
+   }
+
+   // obtenemos el id que deseamos eliminar
+   getPostById(id: string){
+     return this.afs.doc<Post>(`posts/${id}`);
+   }
+
+   // eliminamos el post
+   deletePost(id: string){
+    return this.getPostById(id).delete();
+   }
+
+   // 
+   updatePost(id: string, formData: Partial<Post>){
+     return this.getPostById(id).update(formData);
+   }
+
 }
