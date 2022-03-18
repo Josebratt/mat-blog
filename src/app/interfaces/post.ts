@@ -1,3 +1,5 @@
+import { Timestamp } from "rxjs/internal/operators/timestamp";
+
 export interface Post {
     id?: string;
     title?: string;
@@ -5,5 +7,5 @@ export interface Post {
     content?: string;
     image?: string;
     category?: string;
-    published?: Date;
+    published: Timestamp<any>;
 }
