@@ -5,7 +5,7 @@
         <div *ngIf="authService.user | async as user; else login">
             <button routerLink="/dash-board"
                      mat-stroked-button color="primary">New Post </button>
-            <button (click)="logout()"
+            <button class="logout" (click)="logout()"
                     mat-raised-button color="primary"> Logout </button>
         </div>
         <ng-template #login>
