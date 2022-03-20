@@ -1,0 +1,13 @@
+mat-card {
+    margin: 0 auto;
+    margin-top: 20px;
+    max-width: 500px;
+}
+
+mat-form-field{
+    display: block;
+}
+
+.logout{
+    margin-left: 10px;
+}
