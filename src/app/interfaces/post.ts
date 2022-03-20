@@ -7,5 +7,5 @@ export interface Post {
     content?: string;
     image?: string;
     category?: string;
-    published: Timestamp<any>;
+    published: number;
 }
