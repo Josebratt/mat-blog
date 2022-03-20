@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { UploadTaskSnapshot } from '@angular/fire/compat/storage/interfaces';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Timestamp } from 'rxjs/internal/operators/timestamp';
 import { finalize } from 'rxjs/operators';
@@ -17,7 +18,6 @@ export class DashBoardComponent implements OnInit {
   title: string = '';
   image: string | undefined = '';
   content: string = '';
-  dateTime!: Timestamp<any | undefined>;
 
   textButton: string = 'Create Post';
 
@@ -27,7 +27,8 @@ export class DashBoardComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private postService: PostService,
-    private afStorage: AngularFireStorage
+    private afStorage: AngularFireStorage,
+    private route: Router
     ) { }
 
   ngOnInit(): void {
@@ -39,10 +40,12 @@ export class DashBoardComponent implements OnInit {
       title: this.title,
       content: this.content,
       image: this.image,
-      published: this.dateTime,
+      published: Date.now(),
       author: this.authService.authState.displayName
     }
     this.postService.createPost(data);
+    this.route.navigate(['/blog']);
+
     this.title = '';
     this.content = '';
     this.image = '';
