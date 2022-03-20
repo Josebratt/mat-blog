@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Post } from 'src/app/interfaces/post';
+import { AuthService } from 'src/app/services/auth.service';
 import { PostService } from 'src/app/services/post.service';
 
 @Component({
@@ -12,14 +13,21 @@ export class PostListComponent implements OnInit {
 
   posts: Observable<Post[]>;
 
-  constructor(private postServices: PostService) { 
-    this.posts = this.postServices.getPost();
-    console.log(this.posts);
-    
+  constructor( 
+    public authServices: AuthService,
+    private postServices: PostService) { 
+    this.posts = this.postServices.getPost(); 
+   
   }
 
   ngOnInit(): void {
     
   }
+
+  delete(id: string) {
+    this.postServices.deletePost(id);
+  }
+
+  
 
 }
