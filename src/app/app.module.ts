@@ -20,6 +20,7 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { PostListComponent } from './posts/post-list/post-list.component';
 import { PostDetailsComponent } from './posts/post-details/post-details.component';
 import { DashBoardComponent } from './posts/dash-board/dash-board.component';
+import { FromNowPipe } from './pipes/from-now.pipe';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { DashBoardComponent } from './posts/dash-board/dash-board.component';
     FooterComponent,
     PostListComponent,
     PostDetailsComponent,
-    DashBoardComponent
+    DashBoardComponent,
+    FromNowPipe
   ],
   imports: [
     BrowserModule,
