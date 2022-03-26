@@ -1,6 +1,6 @@
 <mat-toolbar>
     <mat-toolbar-row>
-        <span routerLink="/">Material Blog</span>
+        <span class="point" routerLink="/">Material Blog</span>
         <span class="spacer"></span>
         <div *ngIf="authService.user | async as user; else login">
             <button routerLink="/dash-board"
