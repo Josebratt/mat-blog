@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { map } from 'rxjs/operators';
 import { Post } from '../interfaces/post';
 
@@ -11,7 +12,7 @@ export class PostService {
   postCollection: AngularFirestoreCollection<Post>
   postDoc: AngularFirestoreDocument<Post> | undefined;
 
-  constructor( private afs: AngularFirestore) {
+  constructor( private afs: AngularFirestore, private afStorage: AngularFireStorage) {
     this.postCollection = this.afs.collection('posts', ref => ref.orderBy('published', 'desc'));
    }
 
@@ -44,8 +45,13 @@ export class PostService {
      return this.afs.doc<Post>(`posts/${id}`);
    }
 
-   // eliminamos el post
-   deletePost(id: string){
+   // eliminamos el post, asi como la imagen
+   deletePost(id: string, image: string){
+    const imageStorage = this.afStorage.storage.refFromURL(image!)
+    imageStorage.delete().then(
+      () => console.log('File Deleted') 
+    ).catch( error => console.log(error)
+    );
     return this.getPostById(id).delete();
    }
 
