@@ -11,10 +11,9 @@ import { PostService } from 'src/app/services/post.service';
 @Component({
   selector: 'app-dash-board',
   templateUrl: './dash-board.component.html',
-  styleUrls: ['./dash-board.component.css']
+  styleUrls: ['./dash-board.component.css'],
 })
 export class DashBoardComponent implements OnInit {
-
   title: string = '';
   image: string | undefined = '';
   content: string = '';
@@ -29,20 +28,18 @@ export class DashBoardComponent implements OnInit {
     private postService: PostService,
     private afStorage: AngularFireStorage,
     private route: Router
-    ) { }
+  ) {}
 
-  ngOnInit(): void {
-    
-  }
+  ngOnInit(): void {}
 
-  create(){
+  create() {
     const data = {
       title: this.title,
       content: this.content,
       image: this.image,
       published: Date.now(),
-      author: this.authService.authState.displayName
-    }
+      author: this.authService.authState.displayName,
+    };
     this.postService.createPost(data);
     this.route.navigate(['/blog']);
 
@@ -53,13 +50,13 @@ export class DashBoardComponent implements OnInit {
     this.textButton = 'Post Created';
 
     setTimeout(() => {
-      this.textButton = 'Create Post'
+      this.textButton = 'Create Post';
     }, 3000);
   }
 
-  uploadImage($event: any){
+  uploadImage($event: any) {
     let file = $event.target.files[0];
-    const filePath = `posts/${file.name}`;
+    const filePath = `posts/${Date.now()}${file.name}`;
     const fileRef = this.afStorage.ref(filePath);
 
     if (file.type.split('/')[0] !== 'image') {
@@ -67,24 +64,19 @@ export class DashBoardComponent implements OnInit {
     } else {
       const task = this.afStorage.upload(filePath, file);
       // observe percentage changes
-      this.uploadPercent = task.percentageChanges()
+      this.uploadPercent = task.percentageChanges();
       // get notified when the download URL is available
-      task.snapshotChanges().pipe(
-        finalize(
-          () => {
+      task
+        .snapshotChanges()
+        .pipe(
+          finalize(() => {
             this.downloadURL = fileRef.getDownloadURL();
-            this.downloadURL.subscribe(url => this.image = url);
-          }
+            this.downloadURL.subscribe((url) => (this.image = url));
+          })
         )
-      )
-      .subscribe()
+        .subscribe();
 
-      console.log('image uploaded!');
-
-      file = new File([""], "filename");
-      
-      
+      file = new File([''], 'filename');
     }
   }
-
 }
