@@ -1,14 +1,17 @@
 <section>
   <mat-card *ngFor="let post of posts | async" class="example-card">
-    <img class="image" mat-card-image src="{{ post.image }}" alt="{{ post.title }}" />
+    <img mat-card-image routerLink="{{ post.id }}" src="{{ post.image }}" alt="{{ post.title }}" />
     <p>Post by {{ post.author }} on {{ post.published | date: "fullDate" }}</p>
-    <mat-card-title>{{ post.title }}</mat-card-title>
+    <mat-card-title routerLink="{{ post.id }}">{{ post.title }}</mat-card-title>
     <mat-card-content>
-      <p> {{ post.content }} </p>
+      <p>
+        {{ post.content }}
+      </p>
     </mat-card-content>
-    <mat-card-actions  >
-        <button mat-raised-button routerLink="{{ post.id }}">Read more...</button>
-      <button *ngIf="authServices.currentUserId" mat-button align="end" (click)="delete(post.id!, post.image!)">
+    <mat-card-actions style="justify-content: space-between">
+      <button mat-raised-button routerLink="{{ post.id }}">Read more...</button>
+
+      <button *ngIf="authServices.currentUserId" mat-button (click)="delete(post.id!, post.image!)">
         <mat-icon color="primary">delete</mat-icon>
       </button>
     </mat-card-actions>
