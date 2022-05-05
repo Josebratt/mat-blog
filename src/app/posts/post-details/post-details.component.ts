@@ -53,8 +53,8 @@ export class PostDetailsComponent implements OnInit {
     this.editing = false;
   }
 
-  delete(id: string) {
-    this.postService.deletePost(id);
+  delete(id: string, image: string) {
+    this.postService.deletePost(id, image);
     this.router.navigate(['/blog']);
   }
 
