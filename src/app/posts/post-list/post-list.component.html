@@ -6,9 +6,9 @@
     <mat-card-content>
       <p> {{ post.content }} </p>
     </mat-card-content>
-    <mat-card-actions  *ngIf="authServices.currentUserId">
+    <mat-card-actions  >
         <button mat-raised-button routerLink="{{ post.id }}">Read more...</button>
-      <button mat-button align="end" (click)="delete(post.id!, post.image!)">
+      <button *ngIf="authServices.currentUserId" mat-button align="end" (click)="delete(post.id!, post.image!)">
         <mat-icon color="primary">delete</mat-icon>
       </button>
     </mat-card-actions>
